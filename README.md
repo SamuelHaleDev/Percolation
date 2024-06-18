@@ -1,5 +1,5 @@
 # Percolation
- This is an assignment that utilizes Disjoint Sets and the Monte Carlo Method to solve a unique percolation statistic simulation problem
+ This is a program that utilizes Disjoint Sets and the Monte Carlo Method to solve a unique percolation statistic simulation problem
 
 The code is released under the GNU General Public License, version 3 (GPLv3)
 
