@@ -1,4 +1,6 @@
-﻿namespace Percolation;
+﻿using dependencies.algs4.Algs4;
+
+namespace Percolation;
 
 class Program
 {
