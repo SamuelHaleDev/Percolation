@@ -9,7 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="Dependencies\algs4\Algs4\**\*.cs" />
+    <Compile Include="algs4\Algs4\WeightedQuickUnionUF.cs" />
+    <Compile Include="Program.cs" />
   </ItemGroup>
 
 </Project>
