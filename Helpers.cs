@@ -1,7 +1,6 @@
-using System;
 using System.Diagnostics;
 
-using namespace SamUtilities;
+namespace SamUtilities;
 
 class Helpers
 {
@@ -20,16 +19,17 @@ class Helpers
         Console.WriteLine($"{funcName} test passed!");
     }
 
-    public static void TimeFunction(Func<dynamic> function, string funcName)
+    public static T TimeFunction<T>(Func<T> function, string funcName)
     {
-        var stopwatch = new Diagnostics.Stopwatch();
+        var stopwatch = new Stopwatch();
         stopwatch.Start();
 
-        dynamic result = function();
+        T result = function();
 
         stopwatch.Stop();
-        TimeSpan ts = stopwatch.Elapsed;
-        string elapsedTime = String.Format("{0:00}:{1:00}", ts.Minutes, ts.Seconds);
+        string elapsedTime = String.Format("{0:00}:{1:00}", stopwatch.Elapsed.Minutes, stopwatch.Elapsed.Seconds);
         Console.WriteLine($"Execution Time: {elapsedTime} (mm:ss)");
+
+        return result;
     }
 }

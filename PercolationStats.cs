@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using PercolationClass;
+using SamUtilities;
 
 namespace PercolationStats;
 
@@ -58,7 +59,8 @@ public class PercolationStats
     public static void Main(string[] args)
     {
         int trials = 100, gridSize = 50;
-        PercolationStats ps = new PercolationStats(gridSize, trials);
+        Func<PercolationStats> constructPercolationStats = () => new PercolationStats(gridSize, trials);
+        PercolationStats ps = Helpers.TimeFunction(constructPercolationStats, "PercolationStats");
         Console.WriteLine($"Grid Size: {gridSize} x {gridSize} | Number of Trials: {trials}");
         Console.WriteLine($"The mean percolation threshold is {ps.Mean():F2}");
         Console.WriteLine($"The standard deviation of the percolation threshold is {ps.Stddev():F2}");

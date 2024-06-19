@@ -13,6 +13,7 @@
     <Compile Include="algs4\Algs4\WeightedQuickUnionUF.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="PercolationStats.cs" />
+    <Compile Include="Helpers.cs" />
   </ItemGroup>
 
 </Project>
