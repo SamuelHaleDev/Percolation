@@ -6,11 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <StartupObject>PercolationStats.PercolationStats</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="algs4\Algs4\WeightedQuickUnionUF.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="PercolationStats.cs" />
   </ItemGroup>
 
 </Project>

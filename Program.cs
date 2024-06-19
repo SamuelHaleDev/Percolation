@@ -1,6 +1,6 @@
 ﻿using Algs4;
 
-namespace Percolation;
+namespace PercolationClass;
 
 public class Percolation
 {
