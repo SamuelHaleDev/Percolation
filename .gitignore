@@ -493,3 +493,5 @@ dependencies
 Algs4
 algs4
 /algs4
+
+*.png
