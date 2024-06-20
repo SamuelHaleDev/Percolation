@@ -23,7 +23,8 @@ public class Percolation
         size = N;
         grid = new bool[N,N];
         openSites = 0;
-        connectedOpenSites = new WeightedQuickUnionUF((N * N) + 2); // add 2 elements for a top and bottom layer
+        // We want to create "alter egos" for the bottom layer by adding N
+        connectedOpenSites = new WeightedQuickUnionUF((N * N) + 2 + N); // add 2 elements for a top and bottom layer
         TOP = (N * N); // DS elements 0 - (N*N) - 1 are sites so N*N is our top layer
         BOTTOM = (N * N) + 1;
     }    
@@ -41,12 +42,18 @@ public class Percolation
         bool isThisSiteConnectedToTop = (row == 0);
         bool isNorthSiteOpen = (!isThisSiteConnectedToTop && IsOpen((row - 1), col));
         bool isThisSiteConnectedToBottom = (row == (size - 1));
+        bool isAlterEgo = (row == (size - 1));
         bool isSouthSiteOpen = (!isThisSiteConnectedToBottom && IsOpen((row + 1), col));
         bool isWestSiteOpen = (col > 0 && IsOpen(row, (col - 1)));
         bool isEastSiteOpen = (col < (size - 1) && IsOpen(row, (col + 1)));
         
 
         int targetedSite = ConvertCoordinateToSquareNumber(row, col);
+        int alterEgoSite = 0;
+        if (isAlterEgo) 
+        {
+            alterEgoSite = targetedSite + size + 2;
+        }
         grid[row, col] = true;
         openSites++;
         
@@ -74,6 +81,24 @@ public class Percolation
         {
             connectedOpenSites.Union(ConvertCoordinateToSquareNumber(row, (col + 1)), targetedSite);
         }
+
+        if (!isAlterEgo) return;
+        if (isWestSiteOpen) 
+        {
+            connectedOpenSites.Union(ConvertCoordinateToSquareNumber(row, (col - 1)), alterEgoSite);
+        }
+        if (isNorthSiteOpen)
+        {
+            connectedOpenSites.Union(ConvertCoordinateToSquareNumber((row - 1), col), alterEgoSite);
+        }
+        if (isEastSiteOpen) 
+        {
+            connectedOpenSites.Union(ConvertCoordinateToSquareNumber(row, (col + 1)), alterEgoSite);
+        }
+        if (isSouthSiteOpen) 
+        {
+            connectedOpenSites.Union(ConvertCoordinateToSquareNumber((row + 1), col), alterEgoSite);
+        }
     }  
 
     public bool IsOpen(int row, int col)  
@@ -89,6 +114,14 @@ public class Percolation
     {
         if (row < 0 || row > size || col < 0 || col > size) {
             throw new Exception("Provided row or column is out of bounds!");
+        }
+
+        int targetedSite = ConvertCoordinateToSquareNumber(row, col);
+
+        // When we are checking for bottom row use the alter ego to combat backwash
+        if (row == (size - 1))
+        {
+            return connectedOpenSites.Connected(TOP, (targetedSite + size + 2));
         }
 
         return connectedOpenSites.Connected(TOP, ConvertCoordinateToSquareNumber(row, col));

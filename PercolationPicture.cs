@@ -108,6 +108,7 @@ public class PercolationPicture
         {
             filename = PickRandomFile();
         }
+        filename = "inputFiles\\input10.txt";
         Console.WriteLine("Drawing file " + filename);
         SimulateFromFile(filename);
     }
